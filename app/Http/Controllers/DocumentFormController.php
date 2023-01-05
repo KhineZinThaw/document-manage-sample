@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use PDF;
 use App\Models\DocumentForm;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,8 @@ class DocumentFormController extends Controller
 
     public function export()
     {
-
+        $datas = DocumentForm::where('document_id', 1)->get()->toArray();
+        $pdf = PDF::loadView('document.forms.export', compact('datas'));
+        return $pdf->download('pdf_file.pdf');
     }
 }

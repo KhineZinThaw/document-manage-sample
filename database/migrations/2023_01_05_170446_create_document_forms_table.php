@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('document_forms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('document_id')->constrained('documents')->cascadeOnDelete();
-            $table->text('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }
