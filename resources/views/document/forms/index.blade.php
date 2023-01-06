@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-body">
                @foreach ($forms as $form)
-                   {!! $form->description !!}
+                   {!! $form->description !!} <hr>
                @endforeach
             </div>
         </div>
