@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocumentFormRequest;
 use App\Models\Document;
 use PDF;
 use App\Models\DocumentForm;
@@ -20,7 +21,7 @@ class DocumentFormController extends Controller
         return view('document.forms.create');
     }
 
-    public function store(Request $request)
+    public function store(DocumentFormRequest $request)
     {
         DocumentForm::create([
             'document_id' => 1,
