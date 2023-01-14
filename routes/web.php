@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DocumentFormController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\StudentFormController;
 use App\Http\Controllers\TeacherFormController;
 
@@ -43,6 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/teacher-form', [TeacherFormController::class, 'index'])->name('teacher_form.index');
     Route::post('/teacher-form/preview', [TeacherFormController::class, 'confirm'])->name('teacher_form.confirm');
     Route::post('/teacher-form', [TeacherFormController::class, 'store'])->name('teacher_form.store');
+    Route::get('/teacher-form/export', [TeacherFormController::class, 'export'])->name('teacher_form.export');
+
+    Route::get('/export-all', [ExportController::class, 'exportAll'])->name('export_all');
 });
 
 require __DIR__.'/auth.php';

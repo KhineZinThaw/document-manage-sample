@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use App\Models\TeacherForm;
 use Illuminate\Http\Request;
+use App\Http\Requests\TeacherFormRequest;
 
 class TeacherFormController extends Controller
 {
@@ -13,17 +16,10 @@ class TeacherFormController extends Controller
      */
     public function index()
     {
-        return view('teacher-form.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $teacherForm = TeacherForm::orderBy('id', 'desc')->first();
+        $data = session()->get('teacher_form') ?? [];
+        $data = count($data) > 0 ? (object) $data : $teacherForm;
+        return view('teacher-form.index', compact('teacherForm', 'data'));
     }
 
     /**
@@ -32,53 +28,27 @@ class TeacherFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeacherFormRequest $request)
     {
-        //
+        TeacherForm::create($request->validated());
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function confirm(TeacherFormRequest $request)
     {
-        //
+        session()->put('teacher_form', $request->validated());
+        $data = $request->validated();
+
+        return view('teacher-form.confirm', compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function export()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $data = session()->get('teacher_form') ?? [];
+        $data = count($data) > 0 ? (object) $data : TeacherForm::orderBy('id', 'desc')->first();
+        $pdf = PDF::loadView('teacher-form.export_pdf', compact('data'));
+        return $pdf->download('pdf_file.pdf');
     }
 }

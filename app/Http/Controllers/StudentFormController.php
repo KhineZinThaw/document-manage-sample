@@ -23,16 +23,6 @@ class StudentFormController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,7 +32,7 @@ class StudentFormController extends Controller
     {
         StudentForm::create($request->validated());
 
-        return back();
+        return to_route('teacher_form.index');
     }
 
 
@@ -60,50 +50,5 @@ class StudentFormController extends Controller
         $data = count($data) > 0 ? (object) $data : StudentForm::orderBy('id', 'desc')->first();
         $pdf = PDF::loadView('student-form.export_pdf', compact('data'));
         return $pdf->download('pdf_file.pdf');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

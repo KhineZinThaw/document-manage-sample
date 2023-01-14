@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Student Form') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Student Form') }}
+            </h2>
+            <a href="{{ route('export_all') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-3">
+                Export All
+            </a>
+            </div>
     </x-slot>
 
     <section x-data="studentFormApp()">
@@ -91,7 +96,7 @@
                                 <button type="button" @click="confirm" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Preview
                                 </button>
-                                <a href="{{ route('student_form.export') }}" class="bg-yellow-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-3">
+                                <a href="{{ route('student_form.export') }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mx-3">
                                     Export PDF
                                 </a>
                                 <button type="button" @click="store" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
