@@ -10,4 +10,8 @@ class StudentForm extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'date' => 'datetime',
+    ];
 }

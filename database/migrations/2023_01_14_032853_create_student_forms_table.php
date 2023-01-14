@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('organization_name');
             $table->string('organization_remark');
-            $table->string('organization_sign');
+            $table->string('organization_sign')->nullable();
             $table->string('name');
-            $table->sting('title');
-            $table->sting('sub_title');
+            $table->string('title');
+            $table->string('sub_title');
             $table->dateTime('date');
-            $table->longText('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

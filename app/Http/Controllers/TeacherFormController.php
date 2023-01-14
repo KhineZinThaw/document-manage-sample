@@ -13,7 +13,7 @@ class TeacherFormController extends Controller
      */
     public function index()
     {
-        //
+        return view('teacher-form.index');
     }
 
     /**

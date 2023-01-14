@@ -36,11 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms/export', [DocumentFormController::class, 'export'])->name('forms.export');
 
     Route::get('/student-form', [StudentFormController::class, 'index'])->name('student_form.index');
-    Route::get('/student-form/confirm', [StudentFormController::class, 'confirm'])->name('student_form.confirm');
+    Route::post('/student-form/preview', [StudentFormController::class, 'confirm'])->name('student_form.confirm');
     Route::post('/student-form', [StudentFormController::class, 'store'])->name('student_form.store');
+    Route::get('/student-form/export', [StudentFormController::class, 'export'])->name('student_form.export');
 
     Route::get('/teacher-form', [TeacherFormController::class, 'index'])->name('teacher_form.index');
-    Route::get('/teacher-form/confirm', [TeacherFormController::class, 'confirm'])->name('teacher_form.confirm');
+    Route::post('/teacher-form/preview', [TeacherFormController::class, 'confirm'])->name('teacher_form.confirm');
     Route::post('/teacher-form', [TeacherFormController::class, 'store'])->name('teacher_form.store');
 });
 
